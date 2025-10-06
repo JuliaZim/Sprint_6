@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 import time
-
+import pytest
 
 class BasePage:
     def __init__(self, driver):
@@ -14,7 +14,6 @@ class BasePage:
     ORDER_BUTTON_BELOW = [By.CSS_SELECTOR, '.Button_Middle__1CSJM'] 
     YA_LOGO = [By.CSS_SELECTOR, ".Header_LogoYandex__3TSOI"]
     SAMOKAT_LOGO = [By.CSS_SELECTOR, ".Header_LogoScooter__3lsAR"]
-    YA_SERCH = [By.CSS_SELECTOR, '.arrow__input']
 
     # Ожидание кнопки Заказать вверху страницы
     def wait_order_button_above(self):  
@@ -47,7 +46,7 @@ class BasePage:
     def click_ya_logo(self):
         WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(self.YA_LOGO))
         self.driver.find_element(*self.YA_LOGO).click()
-        time.sleep(2)
+
 
     @allure.step('Получаем урл текущей страницы') 
     def get_current_url(self):
@@ -60,5 +59,9 @@ class BasePage:
             self.driver.switch_to.window(windows[1])  # Индексация с нуля, windows[0] - стартовое окно
         else:
             print("Новое окно не было найдено")
+
+    @allure.step('ждем загрузки страницы Дзен') 
+    def wait_load_page_ya(self):
+        WebDriverWait(self.driver, 5).until(EC.url_contains('http'))
         
             
