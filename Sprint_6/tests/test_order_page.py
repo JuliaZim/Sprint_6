@@ -6,6 +6,7 @@ from page.order_page_succes_form import OrderPageSuccessForm
 from selenium import webdriver
 import allure
 import pytest
+from data import urls
 
 
 class TestOrderPage:
@@ -40,12 +41,12 @@ class TestOrderPage:
         success_page.click_see_status()
         base_page.click_samokat_logo()
         act_result_main_page = base_page.get_current_url()
-        assert act_result_main_page == "https://qa-scooter.praktikum-services.ru/"
+        assert act_result_main_page == urls.main_page_samokat_url
         base_page.click_ya_logo()
         base_page.switch_to_new_window()
         base_page.wait_load_page_ya()
         act_result_ya_url = base_page.get_current_url()
-        assert act_result_ya_url == "https://dzen.ru/?yredirect=true" or 'dzen' in act_result_ya_url
+        assert act_result_ya_url == urls.dzen_url or 'dzen' in act_result_ya_url
 
     @allure.title("Проверка успешного заказа по нижней кнопке Заказать")
     @allure.description(
@@ -70,9 +71,9 @@ class TestOrderPage:
         success_page.click_see_status()
         base_page.click_samokat_logo()
         act_result_main_page = base_page.get_current_url()
-        assert act_result_main_page == "https://qa-scooter.praktikum-services.ru/"
+        assert act_result_main_page == urls.main_page_samokat_url
         base_page.click_ya_logo()
         base_page.switch_to_new_window()
         base_page.wait_load_page_ya()
         act_result_ya_url = base_page.get_current_url()
-        assert act_result_ya_url == "https://dzen.ru/?yredirect=true" or 'dzen' in act_result_ya_url
+        assert act_result_ya_url == urls.dzen_url or 'dzen' in act_result_ya_url

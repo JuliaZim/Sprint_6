@@ -98,7 +98,7 @@ class MainPage(BasePage):
     #Ожидание текста
     @allure.step('Ожидаем отображение текста на вопрос о зарядке')
     def wait_text_about_charger(self):
-        self.wait_for_element_to_be_visibled(main_page_locators.ABOUT_CHARGER_TEXT)
+        self.wait_for_element_to_be_visible(main_page_locators.ABOUT_CHARGER_TEXT)
     # Получить ответ на вопрос о зарядке
     @allure.step('Возвращаем ответ на вопрос о зарядке')
     def get_answer_about_charger(self):

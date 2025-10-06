@@ -6,13 +6,14 @@ from page.order_page_step1 import OrderPageStep1
 from page.order_page_step2 import OrderPageStep2
 from page.order_page_succes_form import OrderPageSuccessForm
 from page.base_page import BasePage
+from data import urls
 
 
 # Фикстура
 @pytest.fixture(scope='function')
 def setup_driver():
     driver = webdriver.Firefox()
-    driver.get("https://qa-scooter.praktikum-services.ru/")
+    driver.get(urls.main_page_samokat_url)
     yield driver
     driver.quit()   
 

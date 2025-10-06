@@ -1,6 +1,7 @@
 from page.question_about_important_page import MainPage
 from selenium import webdriver
 import allure
+from data import answer_text
 
 
 
@@ -14,7 +15,7 @@ class TestMainPage:
         open_question.wait_text_how_much()
         act_result = str(open_question.get_answer_how_much())
         assert (
-            act_result == "Сутки — 400 рублей. Оплата курьеру — наличными или картой."
+            act_result == answer_text.exp_answer_how_much
         ), f"{act_result} не равен ожидаемому 'Сутки — 400 рублей. Оплата курьеру — наличными или картой.'"
 
 
@@ -27,7 +28,7 @@ class TestMainPage:
         act_result = str(open_question.get_answer_want_some_scooter())
         assert (
             act_result
-            == "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим."
+            == answer_text.exp_answer_want_some_scooter
         ), f"{act_result} не равен ожидаемому "
 
     @allure.title('Проверка ответа на вопрос о времени аренды')
@@ -39,7 +40,7 @@ class TestMainPage:
         act_result = str(open_question.get_answer_about_time())
         assert (
             act_result
-            == "Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30."
+            == answer_text.exp_answer_about_rent_time
         ), f"{act_result} не равен ожидаемому "
 
     @allure.title('Проверка ответа на вопрос о возможности взять самокат сегодня')
@@ -51,7 +52,7 @@ class TestMainPage:
         act_result = str(open_question.get_answer_take_scooter_today())
         assert (
             act_result
-            == "Только начиная с завтрашнего дня. Но скоро станем расторопнее."
+            == answer_text.exp_answer_take_scooter_today
         ), f"{act_result} не равен ожидаемому "
 
     @allure.title('Проверка ответа на вопрос о продлении или завершении раньше')
@@ -63,7 +64,7 @@ class TestMainPage:
         act_result = str(open_question.get_answer_prolong_or_end_early())
         assert (
             act_result
-            == "Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру 1010."
+            == answer_text.exp_answer_prolong_or_end_early
         ), f"{act_result} не равен ожидаемому "
 
     @allure.title('Проверка ответа на вопрос о зарядке')
@@ -75,7 +76,7 @@ class TestMainPage:
         act_result = str(open_question.get_answer_about_charger())
         assert (
             act_result
-            == "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится."
+            == answer_text.exp_answer_about_charger
         ), f"{act_result} не равен ожидаемому "
 
     @allure.title('Проверка ответа на вопрос об отмене')
@@ -87,7 +88,7 @@ class TestMainPage:
         act_result = str(open_question.get_answer_about_cancel())
         assert (
             act_result
-            == "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои."
+            == answer_text.exp_answer_about_cancel
         ), f"{act_result} не равен ожидаемому "
 
     @allure.title('Проверка ответа на вопрос о аренде за МКАДом')
@@ -99,7 +100,7 @@ class TestMainPage:
         act_result = str(open_question.get_answer_about_out_of_mkad())
         assert (
             act_result
-            == "Да, обязательно. Всем самокатов! И Москве, и Московской области."
+            == answer_text.exp_answer_about_out_of_mkad
         ), f"{act_result} не равен ожидаемому "
 
     
