@@ -16,15 +16,19 @@ class BasePage:
     SAMOKAT_LOGO = [By.CSS_SELECTOR, ".Header_LogoScooter__3lsAR"]
 
     # Ожидание кнопки Заказать вверху страницы
+    @allure.step('Ожидаем пока кнопка Заказать вверху страницы станет кликабельной') 
     def wait_order_button_above(self):  
         WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(self.ORDER_BUTTON_ABOVE))  
     # Ожидание кнопки Заказать внизу страницы
+    @allure.step('Ожидаем пока кнопка Заказать внизу страницы станет кликабельной') 
     def wait_order_button_below(self):  
         WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(self.ORDER_BUTTON_BELOW))
     # Кликнуть на кнопку Заказать вверху страницы
+    @allure.step('Клик на кнопку Заказать вверху страницы') 
     def click_order_button_above(self):
         self.driver.find_element(*self.ORDER_BUTTON_ABOVE).click()
     # Кликнуть на кнопку Заказать внизу страницы
+    @allure.step('Клик на кнопку Заказать вверху страницы') 
     def click_order_button_below(self):
         self.driver.find_element(*self.ORDER_BUTTON_BELOW).click()
     @allure.step('Кликаем на кнопку Заказать вверху страницы') 

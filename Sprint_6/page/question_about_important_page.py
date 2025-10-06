@@ -7,8 +7,6 @@ from page.base_page import BasePage
 
 
 class MainPage(BasePage):
-    def __init__(self, driver):
-        super().__init__(driver)
     # Согласиться на куки
     @allure.step('Принимаем куки')    
     def accept_cookie(self):

@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 
 
 class OrderPageStep1(BasePage):
+    @allure.step('Ожидаем отображения поля ввода имени') 
     def wait_name_input(self):
         WebDriverWait(self.driver, 5).until(
             EC.visibility_of_element_located(order_page_locators.NAME_INPUT)
@@ -45,6 +46,7 @@ class OrderPageStep1(BasePage):
     def click_next_button_first_step(self):
         self.driver.find_element(*order_page_locators.NEXT_BUTTON).click()
 
+    @allure.step('Заполняем форму заказа на шаге 1') 
     def fill_first_step(self, name, address):
         self.wait_name_input
         self.set_name(name)

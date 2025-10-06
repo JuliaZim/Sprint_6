@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 
 
 class OrderPageStep2(BasePage):
+    @allure.step('Ожидаем загрузки поля даты доставки') 
     def wait_delivery_time_input(self):
         WebDriverWait(self.driver, 5).until(
             EC.visibility_of_element_located(order_page_locators.DELIVERY_TIME_INPUT)
@@ -46,6 +47,7 @@ class OrderPageStep2(BasePage):
     def set_comment(self, comment):
         self.driver.find_element(*order_page_locators.COMMENT_INPUT).send_keys(comment)
 
+    @allure.step('Заполняем форму заказа на шаге 2') 
     def fill_second_step(self, comment):
         self.wait_delivery_time_input()
         self.set_delivery_time_input()
