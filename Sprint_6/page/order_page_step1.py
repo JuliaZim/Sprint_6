@@ -1,7 +1,5 @@
 import allure
 from locators import order_page_locators
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 from page.base_page import BasePage
 import random
 from selenium.webdriver.common.by import By
@@ -32,8 +30,7 @@ class OrderPageStep1(BasePage):
         self.click_element(station_locator)
 
     @allure.step('Заполняем поле телефон') 
-    def set_telephone(self):
-        telephone = f'89{random.randint(1000000000,1000000000)}'
+    def set_telephone(self, telephone):
         self.send_keys_element(order_page_locators.TELEPHONE_INPUT, telephone)
     
     @allure.step('Нажимаем кнопку Далее на первом шаге') 
@@ -41,11 +38,11 @@ class OrderPageStep1(BasePage):
         self.click_element(order_page_locators.NEXT_BUTTON)
 
     @allure.step('Заполняем форму заказа на шаге 1') 
-    def fill_first_step(self, name, address):
+    def fill_first_step(self, name, address, telephone):
         self.wait_name_input
         self.set_name(name)
         self.set_lastname()
         self.set_address(address)
         self.set_subway_station()
-        self.set_telephone()
+        self.set_telephone(telephone)
         self.click_next_button_first_step()

@@ -1,6 +1,5 @@
 from selenium import webdriver
 import pytest
-from selenium.webdriver.support import expected_conditions as EC
 from page.question_about_important_page import MainPage
 from data import urls
 

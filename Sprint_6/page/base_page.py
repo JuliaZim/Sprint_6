@@ -2,8 +2,7 @@ import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-import time
-import pytest
+
 
 class BasePage:
     def __init__(self, driver):

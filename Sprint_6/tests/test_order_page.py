@@ -5,7 +5,7 @@ from page.order_page_succes_form import OrderPageSuccessForm
 import allure
 import pytest
 from data import urls
-
+import random
 
 class TestOrderPage:
 
@@ -17,8 +17,8 @@ class TestOrderPage:
     @allure.feature("Заказ")
     @pytest.mark.parametrize("order_data",
     [
-        ("Ия", "Москва, ул.Часовая, д5, кв15", "Комментарий для курьера"),
-        ("Александр", "Санкт-Петербург, Невский проспект, д10", ""),
+        ("Ия", "Москва, ул.Часовая, д5, кв15", f'89{random.randint(1000000000,1000000000)}' ,"Комментарий для курьера"),
+        ("Александр", "Санкт-Петербург, Невский проспект, д10", f'89{random.randint(1000000000,1000000000)}',""),
     ],)
     def test_order_with_above_order_button(self, order_data, setup_driver):
         driver = setup_driver
@@ -26,8 +26,8 @@ class TestOrderPage:
         main_page.accept_cookie()
         main_page.click_order_button_above_with_wait()
         order_page = OrderPageStep1(driver)
-        name, address, comment = order_data
-        order_page.fill_first_step(name, address)
+        name, address, telephone,comment = order_data
+        order_page.fill_first_step(name, address, telephone)
         order_page2 = OrderPageStep2(driver)
         order_page2.fill_second_step(comment)
         order_page2.click_next_button_second_step()
@@ -50,13 +50,13 @@ class TestOrderPage:
         "На странице самоката ищем кнопку Заказать в нижней части страницы, кликаем, заполняем шаг1, заполняем шаг2, кликаем Заказать, проверяем, что появилось окно успешно сформированного заказа. Проверяем, что по клику на самокат происходит переход на страницу самоката, по клику на Яндекс происходит переход на Дзен"
     )
     @allure.feature("Заказ")
-    def test_order_with_below_order_button(self, setup_driver, name="Юля", address='Екатеринбург', comment = 'Комментарий'):
+    def test_order_with_below_order_button(self, setup_driver, name="Юля", address='Екатеринбург', telephone = f'89{random.randint(1000000000,1000000000)}' ,comment = 'Комментарий'):
         driver = setup_driver
         main_page = MainPage(driver)
         main_page.accept_cookie()
         main_page.click_order_button_below_with_wait()
         order_page = OrderPageStep1(driver)
-        order_page.fill_first_step(name, address)
+        order_page.fill_first_step(name, address, telephone)
         order_page2 = OrderPageStep2(driver)
         order_page2.fill_second_step(comment)
         order_page2.click_next_button_second_step()
