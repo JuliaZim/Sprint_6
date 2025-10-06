@@ -11,14 +11,14 @@ class OrderPageSuccessForm(BasePage):
 
     @allure.step('Получаем заголовок формы') 
     def get_header_result(self):
-        return self.driver.find_element(*self.SUCCESS_STATUS).text
+        return self.get_text_from_element(self.SUCCESS_STATUS)
     
     @allure.step('Проверяем видимость формы успешной заявки') 
     def get_status_form(self):
-        return self.driver.find_element(*self.STATUS_FORM).is_displayed()
+        return self.find_element(self.STATUS_FORM).is_displayed()
     
     @allure.step('Нажимаем на кнопку Посмотреть статус') 
     def click_see_status(self):
-        self.driver.find_element(*self.SEE_STATUS_BUTTON).click()
+        self.click_element(self.SEE_STATUS_BUTTON)
 
 

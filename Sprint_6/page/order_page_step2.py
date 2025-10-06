@@ -10,42 +10,38 @@ from selenium.webdriver.common.by import By
 class OrderPageStep2(BasePage):
     @allure.step('Ожидаем загрузки поля даты доставки') 
     def wait_delivery_time_input(self):
-        WebDriverWait(self.driver, 5).until(
-            EC.visibility_of_element_located(order_page_locators.DELIVERY_TIME_INPUT)
-        )
+        self.wait_for_element_to_be_visible(order_page_locators.DELIVERY_TIME_INPUT)
 
     @allure.step('Заполняем поле Когда привезти самокат') 
     def set_delivery_time_input(self):
-        self.driver.find_element(*order_page_locators.DELIVERY_TIME_INPUT).click()
-        date_element = self.driver.find_element(
-            *order_page_locators.DELIVERY_DATE_BUTTON
+        self.click_element(order_page_locators.DELIVERY_TIME_INPUT)
+        date_element = self.find_element(
+            order_page_locators.DELIVERY_DATE_BUTTON
         )
         date_element.click()
 
     @allure.step('Заполняем поле Время аренды') 
     def set_rent_time(self):
         rent_time = random.randint(1, 7)
-        self.driver.find_element(*order_page_locators.RENT_TIME_INPUT).click()
+        self.click_element(order_page_locators.RENT_TIME_INPUT)
         time_locator = (
             By.XPATH,
             order_page_locators.RENT_TIME_VALUE[1].format(rent_time),
         )
-        WebDriverWait(self.driver, 5).until(
-            EC.element_to_be_clickable(order_page_locators.RENT_TIME_VALUE)
-        )
-        self.driver.find_element(*time_locator).click()
+        self.wait_for_element_to_be_clickable(order_page_locators.RENT_TIME_VALUE)
+        self.click_element(time_locator)
 
     @allure.step('Выбираем чек-бокс с черным цветом') 
     def set_black_color(self):
-        self.driver.find_element(*order_page_locators.COLOR_BLACK_CHECKBOX).click()
+        self.click_element(order_page_locators.COLOR_BLACK_CHECKBOX)
 
     @allure.step('Выбираем чек-бокс с серым цветом') 
     def set_grey_color(self):
-        self.driver.find_element(*order_page_locators.COLOR_GREY_CHECKBOX).click()
+        self.click_element(order_page_locators.COLOR_GREY_CHECKBOX)
 
     @allure.step('Заполняем комментарий для курьера') 
     def set_comment(self, comment):
-        self.driver.find_element(*order_page_locators.COMMENT_INPUT).send_keys(comment)
+        self.send_keys_element(order_page_locators.COMMENT_INPUT, comment)
 
     @allure.step('Заполняем форму заказа на шаге 2') 
     def fill_second_step(self, comment):
@@ -58,14 +54,10 @@ class OrderPageStep2(BasePage):
 
     @allure.step('Кликаем кнопку Заказать на втором шаге') 
     def click_next_button_second_step(self):
-        WebDriverWait(self.driver, 5).until(
-            EC.element_to_be_clickable(order_page_locators.ORDER_BUTTON)
-        )
-        self.driver.find_element(*order_page_locators.ORDER_BUTTON).click()
+        self.wait_for_element_to_be_clickable(order_page_locators.ORDER_BUTTON)
+        self.click_element(order_page_locators.ORDER_BUTTON)
 
     @allure.step('Нажимаем кнопку Да на вопрос о подтверждении заказа') 
     def click_yes_button(self):
-        WebDriverWait(self.driver, 5).until(
-            EC.element_to_be_clickable(order_page_locators.YES_BUTTON)
-        )
-        self.driver.find_element(*order_page_locators.YES_BUTTON).click()
+        self.wait_for_element_to_be_clickable(order_page_locators.YES_BUTTON)
+        self.click_element(order_page_locators.YES_BUTTON)
