@@ -1,6 +1,7 @@
-from page.question_about_important_page import MainPage
 import allure
 from data import answer_text
+import pytest
+from locators import main_page_locators
 
 
 
@@ -9,97 +10,22 @@ class TestMainPage:
     @allure.title('Проверка ответа на вопрос о стоимости')
     @allure.description('На странице ищем блок с вопросами, нажимаем на кнопку с вопросом о стоимости, проверяем, что ответ совпадает с ожидаемым')
     @allure.feature('Вопросы о важном')
-    def test_question_how_much(self, open_question):
-        open_question.click_quiestion_how_much()
-        open_question.wait_text_how_much()
-        act_result = str(open_question.get_answer_how_much())
+    @pytest.mark.parametrize('question_data',
+                             [
+        (main_page_locators.HOW_MUCH_BUTTON, main_page_locators.HOW_MUCH_TEXT, answer_text.exp_answer_how_much),
+        (main_page_locators.WANT_SOME_SCOOTER_BUTTON, main_page_locators.WANT_SOME_SCOOTER_TEXT, answer_text.exp_answer_want_some_scooter),
+        (main_page_locators.ABOUT_RENT_TIME_BUTTON, main_page_locators.ABOUT_RENT_TIME_TEXT, answer_text.exp_answer_about_rent_time),
+        (main_page_locators.TAKE_SCOOTER_TODAY_BUTTON, main_page_locators.TAKE_SCOOTER_TODAY_TEXT, answer_text.exp_answer_take_scooter_today),
+        (main_page_locators.PROLONG_OR_END_EARLY_BUTTON, main_page_locators.PROLONG_OR_END_EARLY_TEXT, answer_text.exp_answer_prolong_or_end_early),
+        (main_page_locators.ABOUT_CHARGER_BUTTON, main_page_locators.ABOUT_CHARGER_TEXT, answer_text.exp_answer_about_charger),
+        (main_page_locators.ABOUT_CANCEL_BUTTON, main_page_locators.ABOUT_CANCEL_TEXT, answer_text.exp_answer_about_cancel),
+        (main_page_locators.ABOUT_OUT_OF_MKAD_BUTTON, main_page_locators.ABOUT_OUT_OF_MKAD_TEXT, answer_text.exp_answer_about_out_of_mkad),
+    ])
+    def test_question(self, open_question, question_data):
+        question_locator, answer_locator, actual_text = question_data
+        open_question.click_quiestion_param(question_locator)
+        open_question.wait_text_param(answer_locator)
+        act_result = str(open_question.get_answer_param(answer_locator))
         assert (
-            act_result == answer_text.exp_answer_how_much
-        ), f"{act_result} не равен ожидаемому 'Сутки — 400 рублей. Оплата курьеру — наличными или картой.'"
-
-
-    @allure.title('Проверка ответа на вопрос о вохможности взять несколько самокатов')
-    @allure.description('На странице ищем блок с вопросами, нажимаем на кнопку с вопросом о возможности взять несколько самокатов, проверяем, что ответ совпадает с ожидаемым')
-    @allure.feature('Вопросы о важном')   
-    def test_question_want_some_scooter(self, open_question):
-        open_question.click_want_some_scooter()
-        open_question.wait_text_want_some_scooter()
-        act_result = str(open_question.get_answer_want_some_scooter())
-        assert (
-            act_result
-            == answer_text.exp_answer_want_some_scooter
-        ), f"{act_result} не равен ожидаемому "
-
-    @allure.title('Проверка ответа на вопрос о времени аренды')
-    @allure.description('На странице ищем блок с вопросами, нажимаем на кнопку с вопросом о времени аренды, проверяем, что ответ совпадает с ожидаемым')
-    @allure.feature('Вопросы о важном')
-    def test_question_about_rent_time(self, open_question):
-        open_question.click_quiestion_rent_time()
-        open_question.wait_text_rent_time()
-        act_result = str(open_question.get_answer_about_time())
-        assert (
-            act_result
-            == answer_text.exp_answer_about_rent_time
-        ), f"{act_result} не равен ожидаемому "
-
-    @allure.title('Проверка ответа на вопрос о возможности взять самокат сегодня')
-    @allure.description('На странице ищем блок с вопросами, нажимаем на кнопку с вопросом о возможности взять самокат сегодня, проверяем, что ответ совпадает с ожидаемым')
-    @allure.feature('Вопросы о важном')
-    def test_question_take_scooter_today(self, open_question):
-        open_question.click_quiestion_take_scooter_today()
-        open_question.wait_text_take_scooter_today()
-        act_result = str(open_question.get_answer_take_scooter_today())
-        assert (
-            act_result
-            == answer_text.exp_answer_take_scooter_today
-        ), f"{act_result} не равен ожидаемому "
-
-    @allure.title('Проверка ответа на вопрос о продлении или завершении раньше')
-    @allure.description('На странице ищем блок с вопросами, нажимаем на кнопку с вопросом о продлении или завершении раньше, проверяем, что ответ совпадает с ожидаемым')
-    @allure.feature('Вопросы о важном')
-    def test_question_prolong_or_end_early(self, open_question):
-        open_question.click_quiestion_prolong_or_end_early()
-        open_question.wait_text_prolong_or_end_early()
-        act_result = str(open_question.get_answer_prolong_or_end_early())
-        assert (
-            act_result
-            == answer_text.exp_answer_prolong_or_end_early
-        ), f"{act_result} не равен ожидаемому "
-
-    @allure.title('Проверка ответа на вопрос о зарядке')
-    @allure.description('На странице ищем блок с вопросами, нажимаем на кнопку с вопросом о зарядке, проверяем, что ответ совпадает с ожидаемым')
-    @allure.feature('Вопросы о важном')
-    def test_question_about_charger(self, open_question):
-        open_question.click_quiestion_about_charger()
-        open_question.wait_text_about_charger()
-        act_result = str(open_question.get_answer_about_charger())
-        assert (
-            act_result
-            == answer_text.exp_answer_about_charger
-        ), f"{act_result} не равен ожидаемому "
-
-    @allure.title('Проверка ответа на вопрос об отмене')
-    @allure.description('На странице ищем блок с вопросами, нажимаем на кнопку с вопросом об отмене, проверяем, что ответ совпадает с ожидаемым')
-    @allure.feature('Вопросы о важном')
-    def test_question_about_cancel(self, open_question):
-        open_question.click_quiestion_about_cancel()
-        open_question.wait_text_about_cancel()
-        act_result = str(open_question.get_answer_about_cancel())
-        assert (
-            act_result
-            == answer_text.exp_answer_about_cancel
-        ), f"{act_result} не равен ожидаемому "
-
-    @allure.title('Проверка ответа на вопрос о аренде за МКАДом')
-    @allure.description('На странице ищем блок с вопросами, нажимаем на кнопку с вопросом о аренде за МКАДом, проверяем, что ответ совпадает с ожидаемым')
-    @allure.feature('Вопросы о важном')
-    def test_question_about_out_of_mkad(self, open_question):
-        open_question.click_quiestion_about_out_of_mkad()
-        open_question.wait_text_about_out_of_mkad()
-        act_result = str(open_question.get_answer_about_out_of_mkad())
-        assert (
-            act_result
-            == answer_text.exp_answer_about_out_of_mkad
-        ), f"{act_result} не равен ожидаемому "
-
-    
+            act_result == actual_text
+        ), f"{act_result} не равен ожидаемому {actual_text}"
