@@ -1,5 +1,4 @@
 from page.question_about_important_page import MainPage
-from selenium import webdriver
 import allure
 from data import answer_text
 

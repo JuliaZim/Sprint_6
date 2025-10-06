@@ -2,10 +2,6 @@ from selenium import webdriver
 import pytest
 from selenium.webdriver.support import expected_conditions as EC
 from page.question_about_important_page import MainPage
-from page.order_page_step1 import OrderPageStep1
-from page.order_page_step2 import OrderPageStep2
-from page.order_page_succes_form import OrderPageSuccessForm
-from page.base_page import BasePage
 from data import urls
 
 

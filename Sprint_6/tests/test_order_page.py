@@ -1,9 +1,7 @@
 from page.question_about_important_page import MainPage
-from page.base_page import BasePage
 from page.order_page_step1 import OrderPageStep1
 from page.order_page_step2 import OrderPageStep2
 from page.order_page_succes_form import OrderPageSuccessForm
-from selenium import webdriver
 import allure
 import pytest
 from data import urls
@@ -26,8 +24,7 @@ class TestOrderPage:
         driver = setup_driver
         main_page = MainPage(driver)
         main_page.accept_cookie()
-        base_page = BasePage(driver)
-        base_page.click_order_button_above_with_wait()
+        main_page.click_order_button_above_with_wait()
         order_page = OrderPageStep1(driver)
         name, address, comment = order_data
         order_page.fill_first_step(name, address)
@@ -39,13 +36,13 @@ class TestOrderPage:
         act_result_header = success_page.get_header_result()
         assert "Заказ оформлен" in act_result_header and success_page.get_status_form()
         success_page.click_see_status()
-        base_page.click_samokat_logo()
-        act_result_main_page = base_page.get_current_url()
+        main_page.click_samokat_logo()
+        act_result_main_page = main_page.get_current_url()
         assert act_result_main_page == urls.main_page_samokat_url
-        base_page.click_ya_logo()
-        base_page.switch_to_new_window()
-        base_page.wait_load_page_ya()
-        act_result_ya_url = base_page.get_current_url()
+        main_page.click_ya_logo()
+        main_page.switch_to_new_window()
+        main_page.wait_load_page_ya()
+        act_result_ya_url = main_page.get_current_url()
         assert act_result_ya_url == urls.dzen_url or 'dzen' in act_result_ya_url
 
     @allure.title("Проверка успешного заказа по нижней кнопке Заказать")
@@ -57,8 +54,7 @@ class TestOrderPage:
         driver = setup_driver
         main_page = MainPage(driver)
         main_page.accept_cookie()
-        base_page = BasePage(driver)
-        base_page.click_order_button_below_with_wait()
+        main_page.click_order_button_below_with_wait()
         order_page = OrderPageStep1(driver)
         order_page.fill_first_step(name, address)
         order_page2 = OrderPageStep2(driver)
@@ -69,11 +65,11 @@ class TestOrderPage:
         act_result_header = success_page.get_header_result()
         assert "Заказ оформлен" in act_result_header and success_page.get_status_form()
         success_page.click_see_status()
-        base_page.click_samokat_logo()
-        act_result_main_page = base_page.get_current_url()
+        main_page.click_samokat_logo()
+        act_result_main_page = main_page.get_current_url()
         assert act_result_main_page == urls.main_page_samokat_url
-        base_page.click_ya_logo()
-        base_page.switch_to_new_window()
-        base_page.wait_load_page_ya()
-        act_result_ya_url = base_page.get_current_url()
+        main_page.click_ya_logo()
+        main_page.switch_to_new_window()
+        main_page.wait_load_page_ya()
+        act_result_ya_url = main_page.get_current_url()
         assert act_result_ya_url == urls.dzen_url or 'dzen' in act_result_ya_url
