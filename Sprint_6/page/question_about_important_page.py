@@ -26,11 +26,11 @@ class MainPage(BasePage):
     def click_quiestion_param(self, question_locator):
         self.click_element(question_locator)
     #Ожидание текста
-    @allure.step('Ждем отображение текста о стоимости')    
+    @allure.step('Ждем отображение текста ответа на вопрос')    
     def wait_text_param(self, answer_locator):
         self.wait_for_element_to_be_visible(answer_locator)
     # Получить текст ответа на вопрос Сколько стоит
-    @allure.step('возвращаем ответ на вопрос о стоимости')    
+    @allure.step('возвращаем ответ на вопрос')    
     def get_answer_param(self, answer_locator):
         answer = self.get_text_from_element(answer_locator)
         return answer
