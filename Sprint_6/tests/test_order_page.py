@@ -9,16 +9,6 @@ import pytest
 
 
 class TestOrderPage:
-    driver = None
-
-    def setup_method(self):
-        # создали драйвер для браузера Chrome
-        self.driver = webdriver.Firefox()
-        self.driver.get("https://qa-scooter.praktikum-services.ru/")
-
-    def teardown_method(self):
-        self.driver.quit()
-
     @allure.title("Проверка успешного заказа по верхней кнопке Заказать")
     @allure.description(
         "На странице самоката ищем кнопку Заказать в верхней части страницы, кликаем, заполняем шаг1, заполняем шаг2, кликаем Заказать, проверяем, что появилось окно успешно сформированного заказа. Проверяем, что по клику на самокат происходит переход на страницу самоката, по клику на Яндекс происходит переход на Дзен"
@@ -29,7 +19,8 @@ class TestOrderPage:
         ("Ия", "Москва, ул.Часовая, д5, кв15", "Комментарий для курьера"),
         ("Александр", "Санкт-Петербург, Невский проспект, д10", ""),
     ],)
-    def test_order_with_above_order_button(self, order_data):
+    def test_order_with_above_order_button(self, setup_driver, order_data):
+        self.driver = setup_driver
         main_page = MainPage(self.driver)
         main_page.accept_cookie()
         base_page = BasePage(self.driver)
@@ -58,7 +49,8 @@ class TestOrderPage:
         "На странице самоката ищем кнопку Заказать в нижней части страницы, кликаем, заполняем шаг1, заполняем шаг2, кликаем Заказать, проверяем, что появилось окно успешно сформированного заказа. Проверяем, что по клику на самокат происходит переход на страницу самоката, по клику на Яндекс происходит переход на Дзен"
     )
     @allure.feature("Заказ")
-    def test_order_with_below_order_button(self, name="Юля", address='Екатеринбург', comment = 'Комментарий'):
+    def test_order_with_below_order_button(self, setup_driver, name="Юля", address='Екатеринбург', comment = 'Комментарий'):
+        self.driver = setup_driver
         main_page = MainPage(self.driver)
         main_page.accept_cookie()
         base_page = BasePage(self.driver)

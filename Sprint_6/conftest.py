@@ -10,9 +10,18 @@ from page.base_page import BasePage
 
 # Фикстура
 @pytest.fixture(scope='function')
-def open_question(request):
-    driver = request.cls.driver 
-    main_page = MainPage(driver)   
+def setup_driver():
+    driver = webdriver.Firefox()
+    driver.get("https://qa-scooter.praktikum-services.ru/")
+    yield driver
+    driver.quit()   
+
+@pytest.fixture(scope='function')
+def open_question(setup_driver):
+    driver = setup_driver 
+    main_page = MainPage(driver)
+    main_page.wait_questions_about_important()
+    main_page.accept_cookie() 
     main_page.scroll_to_question()
     main_page.wait_questions_about_important()
     return main_page

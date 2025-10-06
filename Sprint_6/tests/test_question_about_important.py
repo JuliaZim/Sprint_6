@@ -5,25 +5,11 @@ import allure
 
 
 class TestMainPage:
-    driver = None
-
-    @classmethod
-    def setup_class(cls):
-        # создали драйвер для браузера Chrome
-        cls.driver = webdriver.Firefox()
-        cls.driver.get("https://qa-scooter.praktikum-services.ru/")
-
-    @classmethod
-    def teardown_class(cls):
-        # закрой браузер
-        cls.driver.quit()
-
 
     @allure.title('Проверка ответа на вопрос о стоимости')
     @allure.description('На странице ищем блок с вопросами, нажимаем на кнопку с вопросом о стоимости, проверяем, что ответ совпадает с ожидаемым')
     @allure.feature('Вопросы о важном')
     def test_question_how_much(self, open_question):
-        open_question.accept_cookie()
         open_question.click_quiestion_how_much()
         open_question.wait_text_how_much()
         act_result = str(open_question.get_answer_how_much())
