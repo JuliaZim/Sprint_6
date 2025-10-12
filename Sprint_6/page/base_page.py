@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 
+
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
@@ -24,6 +25,9 @@ class BasePage:
     
     def get_text_from_element(self, locator):
         return self.find_element(locator).text
+    
+    def scroll_to_element(self, locator):
+        self.driver.execute_script("arguments[0].scrollIntoView();", self.find_element(locator))
         
     
     #Локаторы Заказать

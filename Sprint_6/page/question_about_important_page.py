@@ -19,8 +19,7 @@ class MainPage(BasePage):
     #Проскролить вниз до элемента
     @allure.step('Скролим до элемента с вопросами')    
     def scroll_to_question(self):
-        element = self.find_element(main_page_locators.HOW_MUCH_BUTTON)
-        self.driver.execute_script("arguments[0].scrollIntoView();", element)
+        self.scroll_to_element(main_page_locators.HOW_MUCH_BUTTON)
     # Кликнуть на вопрос парам
     @allure.step('Кликаем на вопрос')    
     def click_quiestion_param(self, question_locator):
